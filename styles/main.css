@@ -1,0 +1,23 @@
+/* ========================================================================
+   TALC — DA entry point
+   Ordre d'import : tokens → base → components → utilities.
+   ======================================================================== */
+
+@import url("./tokens.css");
+
+@import url("./base/reset.css");
+@import url("./base/typography.css");
+@import url("./base/grain.css");
+
+@import url("./components/topbar.css");
+@import url("./components/nav.css");
+@import url("./components/hero.css");
+@import url("./components/button.css");
+@import url("./components/card-news.css");
+@import url("./components/card-activity.css");
+@import url("./components/card-post.css");
+@import url("./components/practical.css");
+@import url("./components/footer.css");
+
+@import url("./utilities/animations.css");
+@import url("./utilities/responsive.css");

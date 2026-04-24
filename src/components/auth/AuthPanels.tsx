@@ -115,13 +115,11 @@ export default function AuthPanels({ initialMode = "signin" as Mode }) {
     setBusy(true);
     try {
       const supabase = createClient();
-      const displayName = `${suFirstName.trim()} ${suLastName.trim()}`.trim();
       const { error } = await supabase.auth.signUp({
         email: suEmail,
         password: suPassword,
         options: {
           data: {
-            display_name: displayName,
             first_name: suFirstName.trim(),
             last_name: suLastName.trim(),
           },

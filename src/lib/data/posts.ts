@@ -78,8 +78,8 @@ export async function fetchLatestPosts(limit = 3): Promise<Post[]> {
     // 3. Hydrate les profils en une query groupée.
     const authorIds = Array.from(new Set(posts.map((p) => p.author_id)));
     const { data: profiles } = await supabase
-      .from("profiles")
-      .select("id, display_name, avatar_url")
+      .from("users")
+      .select("id, first_name, last_name, avatar_url")
       .in("id", authorIds);
     const profileMap = new Map(profiles?.map((pr) => [pr.id, pr]) ?? []);
 
@@ -95,7 +95,9 @@ export async function fetchLatestPosts(limit = 3): Promise<Post[]> {
       return {
         id: p.id,
         author: {
-          displayName: profile?.display_name ?? "Anonyme",
+          displayName: profile
+            ? `${profile.first_name} ${profile.last_name}`.trim() || "Anonyme"
+            : "Anonyme",
           avatarUrl: profile?.avatar_url ?? "",
         },
         scope: {

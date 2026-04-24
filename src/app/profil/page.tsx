@@ -2,29 +2,44 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/data/current-user";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { ProfileView } from "@/components/profile/ProfileView";
+
+// Toujours re-fetch : évite un cache stale apres upload avatar/cover.
+export const dynamic = "force-dynamic";
 
 /**
- * /profil — vue des infos du membre connecté.
- *
- * V1 en lecture seule. Édition inline (changer avatar, nom, bio) à
- * faire dans une V1.5 via server actions.
+ * /profil — profil public du membre connecté avec edition inline
+ * (tagline + bio). Cover + avatar affichage seul pour l'instant,
+ * upload ulterieur.
  */
 export default async function ProfilPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/auth");
 
   let createdAt: string | null = null;
-  let bio: string | null = null;
+  let bio = "";
+  let tagline = "";
+  let coverUrl: string | null = null;
+  let coverPositionY = 50;
 
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { data } = await supabase
-      .from("profiles")
-      .select("created_at, bio")
+      .from("users")
+      .select("created_at, bio, tagline, cover_url, cover_position_y")
       .eq("id", user.id)
-      .maybeSingle();
+      .maybeSingle<{
+        created_at: string;
+        bio: string | null;
+        tagline: string | null;
+        cover_url: string | null;
+        cover_position_y: number | null;
+      }>();
     createdAt = data?.created_at ?? null;
-    bio = data?.bio ?? null;
+    bio = data?.bio ?? "";
+    tagline = data?.tagline ?? "";
+    coverUrl = data?.cover_url ?? null;
+    coverPositionY = data?.cover_position_y ?? 50;
   }
 
   const initials = user.displayName
@@ -43,47 +58,17 @@ export default async function ProfilPage() {
     : "—";
 
   return (
-    <main className="account-page">
-      <header className="account-head">
-        <div className="account-eyebrow">Mon espace</div>
-        <h1 className="account-title">
-          Mon <em>profil</em>
-        </h1>
-        <p className="account-sub">
-          Les informations publiques qui apparaissent à côté de vos
-          commentaires et réactions.
-        </p>
-      </header>
-
-      <section className="account-card">
-        <div className="account-identity">
-          <div
-            className="account-avatar"
-            style={
-              user.avatarUrl
-                ? { backgroundImage: `url(${user.avatarUrl})` }
-                : undefined
-            }
-          >
-            {!user.avatarUrl && initials}
-          </div>
-          <div className="account-identity-text">
-            <div className="account-name">{user.displayName}</div>
-            <div className="account-email">{user.email ?? "email non renseigné"}</div>
-          </div>
-        </div>
-
-        <dl className="account-meta">
-          <dt>Membre depuis</dt>
-          <dd>{memberSince}</dd>
-
-          <dt>Rôle</dt>
-          <dd>Membre du site</dd>
-
-          <dt>Bio</dt>
-          <dd>{bio || <em>Pas encore renseignée.</em>}</dd>
-        </dl>
-      </section>
-    </main>
+    <ProfileView
+      displayName={user.displayName}
+      initials={initials}
+      avatarUrl={user.avatarUrl}
+      coverUrl={coverUrl}
+      coverPositionY={coverPositionY}
+      tagline={tagline}
+      bio={bio}
+      memberSince={memberSince}
+      activities=""
+      canEdit
+    />
   );
 }

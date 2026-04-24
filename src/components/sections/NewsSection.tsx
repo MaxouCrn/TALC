@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { NEWS, type NewsItem } from "@/lib/mock-data";
+import { fetchLatestNews } from "@/lib/data/news";
+import type { NewsItem } from "@/lib/mock-data";
 
 function roman(n: number): string {
   const map = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
@@ -33,8 +34,9 @@ function NewsCard({ item, index }: { item: NewsItem; index: number }) {
   );
 }
 
-export default function NewsSection() {
-  if (NEWS.length === 0) return null;
+export default async function NewsSection() {
+  const items = await fetchLatestNews(3);
+  if (items.length === 0) return null;
 
   return (
     <section className="news">
@@ -50,7 +52,7 @@ export default function NewsSection() {
       </header>
 
       <div className="news-grid">
-        {NEWS.map((item, i) => (
+        {items.map((item, i) => (
           <NewsCard key={item.id} item={item} index={i} />
         ))}
       </div>

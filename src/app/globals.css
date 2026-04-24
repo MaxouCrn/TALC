@@ -33,6 +33,7 @@
 @import "../styles/components/auth.css" layer(components);
 @import "../styles/components/user-menu.css" layer(components);
 @import "../styles/components/account.css" layer(components);
+@import "../styles/components/profile.css" layer(components);
 @import "../styles/utilities/animations.css" layer(utilities);
 @import "../styles/utilities/responsive.css" layer(utilities);
 

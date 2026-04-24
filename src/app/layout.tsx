@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IM_Fell_DW_Pica, EB_Garamond } from "next/font/google";
+import Topbar from "@/components/layout/Topbar";
 import "./globals.css";
 
 const imFell = IM_Fell_DW_Pica({
@@ -34,7 +35,10 @@ export default function RootLayout({
       lang="fr"
       className={`${imFell.variable} ${ebGaramond.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <Topbar />
+        {children}
+      </body>
     </html>
   );
 }

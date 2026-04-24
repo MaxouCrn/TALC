@@ -29,6 +29,8 @@
 @import "../styles/components/card-post.css" layer(components);
 @import "../styles/components/practical.css" layer(components);
 @import "../styles/components/footer.css" layer(components);
+@import "../styles/components/form.css" layer(components);
+@import "../styles/components/auth.css" layer(components);
 @import "../styles/utilities/animations.css" layer(utilities);
 @import "../styles/utilities/responsive.css" layer(utilities);
 

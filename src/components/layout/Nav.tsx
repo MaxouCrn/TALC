@@ -25,7 +25,7 @@ const LINKS: NavLink[] = [
   { label: "Actualités", href: "#" },
   { label: "Feed",       href: "#" },
   { label: "Contact",    href: "#" },
-  { label: "Se connecter / S'inscrire", href: "#", cta: true },
+  { label: "Se connecter / S'inscrire", href: "/auth", cta: true },
 ];
 
 export default function Nav() {

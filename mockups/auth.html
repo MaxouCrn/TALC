@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TALC — Auth mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+DW+Pica+SC&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet" />
+<link rel="stylesheet" href="../src/styles/main.css" />
+<style>
+  /* Styles mockup auth — a migrer en src/styles/components/{auth,form}.css apres validation */
+
+  body {
+    min-height: 100vh;
+    padding: 0 0 40px;
+    position: relative;
+  }
+  .auth-wrap > .auth-masthead:first-child { margin-top: 28px; }
+
+  /* ---- Deco illustrations ---- */
+  .auth-deco {
+    position: fixed;
+    z-index: 0;
+    opacity: 0.38;
+    filter: sepia(0.25) contrast(1.05);
+    pointer-events: none;
+    user-select: none;
+    animation: deco-fade-in 1.6s ease-out both;
+  }
+  @keyframes deco-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 0.38; }
+  }
+  .auth-deco--dance { animation-delay: 0.3s; }
+  .auth-deco--yoga  { animation-delay: 0.7s; }
+  .auth-deco img,
+  .auth-deco svg { height: 100%; width: auto; display: block; }
+
+  .auth-deco--dance {
+    right: -330px;
+    top: 58%;
+    transform: translateY(-50%);
+    height: 92vh;
+  }
+  .auth-deco--yoga {
+    left: -180px;
+    bottom: -60px;
+    height: 70vh;
+  }
+
+  @media (max-width: 960px) {
+    .auth-deco { display: none; }
+  }
+
+  .auth-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 22px;
+    transition: max-width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .auth-wrap.is-wide { max-width: 780px; }
+
+  /* ---- Masthead ---- */
+  .auth-masthead {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .auth-masthead .mast-logo {
+    display: inline-block;
+    width: 110px;
+    margin-bottom: 18px;
+  }
+  .auth-masthead .mast-logo img { width: 100%; height: auto; display: block; }
+  .auth-masthead .mast-ornament {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--accent);
+    letter-spacing: 0.8em;
+    margin-bottom: 14px;
+  }
+  .auth-masthead h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(26px, 3.4vw, 36px);
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .auth-masthead h1 em { font-style: italic; color: var(--accent-deep); }
+  .auth-masthead p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-soft);
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  /* ---- Card ---- */
+  .auth-card {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    padding: 26px 34px 22px;
+    box-shadow:
+      6px 6px 0 0 var(--accent-deep),
+      6px 6px 0 1.5px var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .auth-card::before,
+  .auth-card::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    height: 4px;
+    pointer-events: none;
+  }
+  .auth-card::before { top: 10px; border-top: 2px solid var(--rule); border-bottom: 0.5px solid var(--rule); }
+  .auth-card::after  { bottom: 10px; border-top: 0.5px solid var(--rule); border-bottom: 2px solid var(--rule); }
+
+  /* Panels swap */
+  .auth-panel {
+    display: none;
+    animation: auth-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .auth-panel.is-active { display: block; }
+
+  @keyframes auth-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .auth-head {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .auth-eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .auth-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .auth-title em { font-style: italic; color: var(--accent-deep); }
+  .auth-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* ---- Form grid (2 cols) pour signup ---- */
+  .form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
+  }
+  .form-grid-2 .form-field.full { grid-column: 1 / -1; }
+  @media (max-width: 640px) {
+    .form-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ---- Password input with eye toggle ---- */
+  .password-wrap {
+    position: relative;
+    display: block;
+  }
+  .password-wrap .form-input {
+    padding-right: 42px;
+  }
+  .password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.25s ease;
+  }
+  .password-toggle:hover { color: var(--accent); }
+  .password-toggle svg { width: 18px; height: 18px; display: block; }
+  .password-toggle .icon-eye-off { display: none; }
+  .password-toggle.is-visible .icon-eye    { display: none; }
+  .password-toggle.is-visible .icon-eye-off { display: block; }
+
+  /* ---- Password checklist ---- */
+  .password-check {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .password-check.is-visible { display: flex; }
+  .password-check li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--accent-deep);
+    transition: color 0.25s ease;
+  }
+  .password-check li::before {
+    content: "✗";
+    position: absolute;
+    left: 0;
+    font-weight: 600;
+    transition: color 0.25s ease;
+  }
+  .password-check li.ok { color: #3a7a3a; }
+  .password-check li.ok::before { content: "✓"; }
+
+  /* ---- Form ---- */
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+  .form-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .form-label .req { color: var(--accent); margin-left: 2px; }
+  .form-hint {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--sepia);
+    margin-top: -2px;
+    margin-bottom: 4px;
+  }
+  .form-input {
+    font-family: var(--font-body);
+    font-size: 16px;
+    padding: 10px 12px;
+    border: 1.5px solid rgba(26, 22, 20, 0.4);
+    background: transparent;
+    color: var(--ink);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    width: 100%;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(139, 26, 26, 0.12);
+  }
+  .form-input::placeholder { color: var(--sepia); opacity: 0.6; }
+
+  .form-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .form-row.between { justify-content: space-between; }
+  .form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    line-height: 1.45;
+  }
+  .form-check input {
+    margin-top: 3px;
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+  }
+  .form-link {
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+  .form-link:hover { border-bottom-color: var(--accent); }
+
+  .form-submit {
+    width: 100%;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border: 1.5px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+    margin-top: 2px;
+  }
+  .form-submit:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ---- OAuth ---- */
+  .form-sep {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--sepia);
+  }
+  .form-sep::before,
+  .form-sep::after {
+    content: "";
+    flex: 1;
+    border-top: 0.5px solid var(--rule);
+  }
+
+  .oauth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 18px;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+  .oauth-btn:hover { background: var(--paper-deep); }
+  .oauth-btn svg { width: 18px; height: 18px; }
+
+  /* ---- Switch footer ---- */
+  .auth-switch {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 0.5px solid var(--rule);
+    text-align: center;
+  }
+  .auth-switch-label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .auth-switch-btn {
+    width: 100%;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 1.5px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .auth-switch-btn:hover {
+    background: var(--accent);
+    color: var(--paper);
+  }
+
+  /* ---- Error state ---- */
+  .form-field.has-error .form-input {
+    border-color: var(--accent);
+    background: rgba(139, 26, 26, 0.04);
+  }
+  .form-error {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent-deep);
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar anim-fade d1">
+  <div class="date">Vendredi 24 avril 2026</div>
+  <a href="#" class="next-event">
+    <span class="label">Prochain évènement</span>
+    <span class="title-evt">Gala de danse &nbsp;·&nbsp; samedi 14 juin 2026</span>
+  </a>
+  <a href="#" class="topbar-cta">Billetterie &nbsp;→</a>
+</div>
+
+<!-- ============ MASTHEAD NAV ============ -->
+<nav class="masthead-nav anim-fade d2">
+  <a href="#">Le Club</a>
+  <span class="sep">·</span>
+  <a href="#">Activités</a>
+  <span class="sep">·</span>
+  <a href="#">Actualités</a>
+  <span class="sep">·</span>
+  <a href="#">Feed</a>
+  <span class="sep">·</span>
+  <a href="#">Contact</a>
+  <span class="sep">·</span>
+  <a href="#" class="nav-cta">Se connecter / S'inscrire</a>
+</nav>
+
+<!-- ===================== DECO — illustrations ===================== -->
+<div class="auth-deco auth-deco--dance" aria-hidden="true">
+  <img src="../public/dance.png" alt="" />
+</div>
+<div class="auth-deco auth-deco--yoga" aria-hidden="true">
+  <img src="../public/yoga.png" alt="" />
+</div>
+
+<div class="auth-wrap">
+
+  <header class="auth-masthead">
+    <h1>Bienvenue au <em>TALC</em></h1>
+    <p>
+      Connectez-vous pour commenter, réagir et suivre les activités
+      des adhérents de l'association.
+    </p>
+  </header>
+
+  <section class="auth-card">
+
+    <!-- ============ PANEL CONNEXION ============ -->
+    <div class="auth-panel is-active" data-panel="signin">
+      <header class="auth-head">
+        <div class="auth-eyebrow">Déjà membre</div>
+        <h2 class="auth-title">Se <em>connecter</em></h2>
+        <p class="auth-sub">Content de vous revoir parmi nous.</p>
+      </header>
+
+      <form>
+        <div class="form-field">
+          <label class="form-label" for="signin-email">Adresse email</label>
+          <input class="form-input" type="email" id="signin-email" placeholder="vous@exemple.fr" data-validate="email" autocomplete="email" />
+          <span class="form-error" data-error-for="signin-email" hidden>Cet email n'est pas valide.</span>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="signin-password">Mot de passe</label>
+          <div class="password-wrap">
+            <input class="form-input" type="password" id="signin-password" placeholder="••••••••" autocomplete="current-password" />
+            <button type="button" class="password-toggle" data-toggle-password="signin-password" aria-label="Afficher le mot de passe">
+              <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a19.8 19.8 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a19.8 19.8 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-row between">
+          <label class="form-check">
+            <input type="checkbox" id="signin-remember" checked />
+            <span>Se souvenir de moi</span>
+          </label>
+          <a href="#" class="form-link">Mot de passe oublié&nbsp;?</a>
+        </div>
+
+        <button type="submit" class="form-submit">Se connecter</button>
+
+        <div class="form-sep">ou continuer avec</div>
+
+        <button type="button" class="oauth-btn" aria-label="Continuer avec Google">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M21.6 12.2c0-.8-.1-1.6-.2-2.3H12v4.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.3c1.9-1.8 3-4.4 3-7.6z" fill="#4285F4"/>
+            <path d="M12 22c2.7 0 5-.9 6.7-2.4L15.4 17a5.8 5.8 0 0 1-8.7-3h-3.4v2.5A10 10 0 0 0 12 22z" fill="#34A853"/>
+            <path d="M6.7 14a5.8 5.8 0 0 1 0-4V7.5H3.3a10 10 0 0 0 0 9L6.7 14z" fill="#FBBC05"/>
+            <path d="M12 6.3c1.5 0 2.8.5 3.9 1.5l2.9-2.9A10 10 0 0 0 3.3 7.5L6.7 10A5.8 5.8 0 0 1 12 6.3z" fill="#EA4335"/>
+          </svg>
+          <span>Continuer avec Google</span>
+        </button>
+      </form>
+
+      <div class="auth-switch">
+        <div class="auth-switch-label">Pas encore de compte&nbsp;?</div>
+        <button type="button" class="auth-switch-btn" data-switch="signup">
+          Créer un compte
+        </button>
+      </div>
+    </div>
+
+    <!-- ============ PANEL INSCRIPTION ============ -->
+    <div class="auth-panel" data-panel="signup">
+      <header class="auth-head">
+        <div class="auth-eyebrow">Nouveau membre</div>
+        <h2 class="auth-title">Créer un <em>compte</em></h2>
+        <p class="auth-sub">Gratuit, trente secondes chrono.</p>
+      </header>
+
+      <form>
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label class="form-label" for="signup-firstname">Prénom <span class="req">*</span></label>
+            <input class="form-input" type="text" id="signup-firstname" placeholder="Marie" autocomplete="given-name" />
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="signup-lastname">Nom <span class="req">*</span></label>
+            <input class="form-input" type="text" id="signup-lastname" placeholder="Dubois" autocomplete="family-name" />
+          </div>
+
+          <div class="form-field full">
+            <label class="form-label" for="signup-email">Adresse email <span class="req">*</span></label>
+            <input class="form-input" type="email" id="signup-email" placeholder="vous@exemple.fr" data-validate="email" autocomplete="email" />
+            <span class="form-error" data-error-for="signup-email" hidden>Cet email n'est pas valide.</span>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="signup-password">Mot de passe <span class="req">*</span></label>
+            <div class="password-wrap">
+              <input class="form-input" type="password" id="signup-password" placeholder="••••••••" autocomplete="new-password" />
+              <button type="button" class="password-toggle" data-toggle-password="signup-password" aria-label="Afficher le mot de passe">
+                <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a19.8 19.8 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a19.8 19.8 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+            <ul class="password-check" id="pwd-check">
+              <li data-rule="len">Au moins 8 caractères</li>
+              <li data-rule="digit">Au moins un chiffre</li>
+              <li data-rule="special">Au moins un caractère spécial (ex&nbsp;: !&nbsp;?&nbsp;@&nbsp;#&nbsp;&amp;&nbsp;*)</li>
+            </ul>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="signup-password-confirm">Confirmez le mot de passe <span class="req">*</span></label>
+            <div class="password-wrap">
+              <input class="form-input" type="password" id="signup-password-confirm" placeholder="••••••••" autocomplete="new-password" />
+              <button type="button" class="password-toggle" data-toggle-password="signup-password-confirm" aria-label="Afficher le mot de passe">
+                <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a19.8 19.8 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a19.8 19.8 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+            <ul class="password-check" id="pwd-match">
+              <li data-rule="match">Les mots de passe correspondent</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-check">
+            <input type="checkbox" id="signup-charte" />
+            <span>
+              J'ai lu et j'accepte la <a href="#" class="form-link">charte de la communauté</a>
+              (respect, droit à l'image des mineurs, etc.).
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="form-submit">Créer mon compte</button>
+
+        <div class="form-sep">ou continuer avec</div>
+
+        <button type="button" class="oauth-btn" aria-label="Continuer avec Google">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M21.6 12.2c0-.8-.1-1.6-.2-2.3H12v4.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.3c1.9-1.8 3-4.4 3-7.6z" fill="#4285F4"/>
+            <path d="M12 22c2.7 0 5-.9 6.7-2.4L15.4 17a5.8 5.8 0 0 1-8.7-3h-3.4v2.5A10 10 0 0 0 12 22z" fill="#34A853"/>
+            <path d="M6.7 14a5.8 5.8 0 0 1 0-4V7.5H3.3a10 10 0 0 0 0 9L6.7 14z" fill="#FBBC05"/>
+            <path d="M12 6.3c1.5 0 2.8.5 3.9 1.5l2.9-2.9A10 10 0 0 0 3.3 7.5L6.7 10A5.8 5.8 0 0 1 12 6.3z" fill="#EA4335"/>
+          </svg>
+          <span>Continuer avec Google</span>
+        </button>
+      </form>
+
+      <div class="auth-switch">
+        <div class="auth-switch-label">Déjà membre&nbsp;?</div>
+        <button type="button" class="auth-switch-btn" data-switch="signin">
+          Se connecter
+        </button>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<script>
+  // Swap entre panels signin <-> signup + elargit le wrap pour signup
+  (function () {
+    const wrap = document.querySelector(".auth-wrap");
+    const panels = document.querySelectorAll("[data-panel]");
+    const buttons = document.querySelectorAll("[data-switch]");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.switch;
+        panels.forEach((p) => {
+          p.classList.toggle("is-active", p.dataset.panel === target);
+        });
+        wrap?.classList.toggle("is-wide", target === "signup");
+      });
+    });
+  })();
+
+  // Validation email sur blur
+  (function () {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    document.querySelectorAll('input[data-validate="email"]').forEach((input) => {
+      const errorEl = document.querySelector(`[data-error-for="${input.id}"]`);
+      if (!errorEl) return;
+      const field = input.closest(".form-field");
+
+      const setInvalid = (invalid) => {
+        errorEl.hidden = !invalid;
+        field?.classList.toggle("has-error", invalid);
+      };
+
+      input.addEventListener("blur", () => {
+        const v = input.value.trim();
+        setInvalid(v.length > 0 && !emailRegex.test(v));
+      });
+      input.addEventListener("input", () => {
+        if (!errorEl.hidden && emailRegex.test(input.value.trim())) {
+          setInvalid(false);
+        }
+      });
+    });
+  })();
+
+  // Toggle visibility des champs password (icon oeil)
+  (function () {
+    document.querySelectorAll("[data-toggle-password]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-toggle-password");
+        const input = document.getElementById(id);
+        if (!input) return;
+        const shown = input.type === "text";
+        input.type = shown ? "password" : "text";
+        btn.classList.toggle("is-visible", !shown);
+        btn.setAttribute(
+          "aria-label",
+          shown ? "Afficher le mot de passe" : "Masquer le mot de passe",
+        );
+      });
+    });
+  })();
+
+  // Checklist live mot de passe + match de confirmation
+  (function () {
+    const pwd = document.getElementById("signup-password");
+    const confirm = document.getElementById("signup-password-confirm");
+    const list = document.getElementById("pwd-check");
+    const matchList = document.getElementById("pwd-match");
+    if (!pwd || !list) return;
+
+    const rules = {
+      len:     (v) => v.length >= 8,
+      digit:   (v) => /\d/.test(v),
+      special: (v) => /[^A-Za-z0-9]/.test(v),
+    };
+
+    const applyRules = () => {
+      const v = pwd.value;
+      list.classList.toggle("is-visible", v.length > 0);
+      list.querySelectorAll("li[data-rule]").forEach((li) => {
+        const key = li.dataset.rule;
+        li.classList.toggle("ok", rules[key]?.(v) ?? false);
+      });
+    };
+
+    const applyMatch = () => {
+      if (!confirm || !matchList) return;
+      const v = confirm.value;
+      matchList.classList.toggle("is-visible", v.length > 0);
+      const ok = v.length > 0 && v === pwd.value;
+      matchList.querySelector("[data-rule='match']")?.classList.toggle("ok", ok);
+    };
+
+    pwd.addEventListener("input", () => {
+      applyRules();
+      applyMatch();
+    });
+    pwd.addEventListener("blur", () => {
+      if (pwd.value.length === 0) list.classList.remove("is-visible");
+    });
+
+    if (confirm) {
+      confirm.addEventListener("input", applyMatch);
+      confirm.addEventListener("blur", () => {
+        if (confirm.value.length === 0) matchList?.classList.remove("is-visible");
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

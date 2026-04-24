@@ -1,0 +1,121 @@
+/* ========================================================================
+   User menu — avatar + dropdown dans la nav quand l'utilisateur est
+   connecte. Casse text-transform de la nav pour que le nom s'affiche
+   en casse naturelle.
+   ======================================================================== */
+
+.user-menu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.user-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px 4px 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease;
+}
+.user-menu-trigger:hover {
+  border-color: rgba(26, 22, 20, 0.2);
+  background: var(--paper-deep);
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 1.5px solid var(--ink);
+  background-color: var(--paper-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+.user-name {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-caret {
+  color: var(--ink-soft);
+  transition: transform var(--dur-fast) ease;
+}
+.user-caret.is-open { transform: rotate(180deg); }
+
+/* ---- Dropdown panel ---- */
+.user-menu-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 200px;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  box-shadow:
+    4px 4px 0 0 var(--accent-deep),
+    4px 4px 0 1.5px var(--ink);
+  padding: 6px;
+  z-index: 60;
+  animation: user-menu-in 0.25s var(--ease-out) both;
+}
+
+@keyframes user-menu-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.user-menu-item {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+.user-menu-item:hover {
+  background: var(--paper-deep);
+  color: var(--accent);
+}
+
+.user-menu-item.user-menu-danger { color: var(--accent-deep); }
+.user-menu-item.user-menu-danger:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.user-menu-sep {
+  height: 0;
+  border-top: 0.5px solid var(--rule);
+  margin: 4px 0;
+}
+
+@media (max-width: 900px) {
+  .user-name { max-width: 120px; }
+}

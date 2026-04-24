@@ -2,22 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import UserMenu from "@/components/layout/UserMenu";
+import type { CurrentUser } from "@/lib/data/current-user";
 
 /**
- * Nav — masthead sticky.
+ * Nav — masthead sticky, conscient de l'authentification.
  *
  * Client component car surveille sa propre position via IntersectionObserver
- * pour basculer entre l'état "normal" (fond papier plein) et "stuck"
- * (fond semi-transparent + backdrop-blur + shadow) quand elle colle au
- * haut de la viewport.
+ * pour basculer entre l'état "normal" et "stuck". Reçoit l'utilisateur via
+ * prop depuis le layout (server component) qui fait la query Supabase.
  */
 
-type NavLink = {
-  label: string;
-  href: string;
-  /** Mis en avant (rouge + semi-bold) pour les CTAs type "Se connecter". */
-  cta?: boolean;
-};
+type NavLink = { label: string; href: string };
 
 const LINKS: NavLink[] = [
   { label: "Le Club",    href: "#" },
@@ -25,10 +21,9 @@ const LINKS: NavLink[] = [
   { label: "Actualités", href: "#" },
   { label: "Feed",       href: "#" },
   { label: "Contact",    href: "#" },
-  { label: "Se connecter / S'inscrire", href: "/auth", cta: true },
 ];
 
-export default function Nav() {
+export default function Nav({ user }: { user: CurrentUser | null }) {
   const navRef = useRef<HTMLElement | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
@@ -55,14 +50,19 @@ export default function Nav() {
         {LINKS.map((link, i) => (
           <span key={link.href + link.label} style={{ display: "contents" }}>
             {i > 0 && <span className="sep">·</span>}
-            <Link
-              href={link.href}
-              className={link.cta ? "nav-cta" : undefined}
-            >
-              {link.label}
-            </Link>
+            <Link href={link.href}>{link.label}</Link>
           </span>
         ))}
+
+        <span className="sep">·</span>
+
+        {user ? (
+          <UserMenu user={user} />
+        ) : (
+          <Link href="/auth" className="nav-cta">
+            Se connecter / S&apos;inscrire
+          </Link>
+        )}
       </nav>
     </>
   );

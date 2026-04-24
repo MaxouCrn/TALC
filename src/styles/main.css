@@ -20,6 +20,7 @@
 @import url("./components/footer.css");
 @import url("./components/form.css");
 @import url("./components/auth.css");
+@import url("./components/user-menu.css");
 
 @import url("./utilities/animations.css");
 @import url("./utilities/responsive.css");

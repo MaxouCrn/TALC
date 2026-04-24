@@ -3,6 +3,7 @@ import { IM_Fell_DW_Pica, EB_Garamond } from "next/font/google";
 import Topbar from "@/components/layout/Topbar";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
+import { getCurrentUser } from "@/lib/data/current-user";
 import "./globals.css";
 
 const imFell = IM_Fell_DW_Pica({
@@ -27,11 +28,13 @@ export const metadata: Metadata = {
     "Le site de l'association TALC : actualités, activités, feed communautaire et adhésion.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getCurrentUser();
+
   return (
     <html
       lang="fr"
@@ -39,7 +42,7 @@ export default function RootLayout({
     >
       <body>
         <Topbar />
-        <Nav />
+        <Nav user={user} />
         {children}
         <Footer />
       </body>

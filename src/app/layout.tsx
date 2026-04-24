@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IM_Fell_DW_Pica, EB_Garamond } from "next/font/google";
 import Topbar from "@/components/layout/Topbar";
 import Nav from "@/components/layout/Nav";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const imFell = IM_Fell_DW_Pica({
@@ -40,6 +41,7 @@ export default function RootLayout({
         <Topbar />
         <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   );

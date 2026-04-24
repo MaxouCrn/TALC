@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       activities: {
@@ -226,36 +251,6 @@ export type Database = {
           },
         ]
       }
-      profiles: {
-        Row: {
-          avatar_url: string | null
-          bio: string | null
-          created_at: string
-          deleted_at: string | null
-          display_name: string
-          id: string
-          updated_at: string
-        }
-        Insert: {
-          avatar_url?: string | null
-          bio?: string | null
-          created_at?: string
-          deleted_at?: string | null
-          display_name: string
-          id: string
-          updated_at?: string
-        }
-        Update: {
-          avatar_url?: string | null
-          bio?: string | null
-          created_at?: string
-          deleted_at?: string | null
-          display_name?: string
-          id?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       reactions: {
         Row: {
           created_at: string
@@ -414,6 +409,48 @@ export type Database = {
           },
         ]
       }
+      users: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          cover_position_y: number
+          cover_url: string | null
+          created_at: string
+          deleted_at: string | null
+          first_name: string
+          id: string
+          last_name: string
+          tagline: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          cover_position_y?: number
+          cover_url?: string | null
+          created_at?: string
+          deleted_at?: string | null
+          first_name: string
+          id: string
+          last_name: string
+          tagline?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          cover_position_y?: number
+          cover_url?: string | null
+          created_at?: string
+          deleted_at?: string | null
+          first_name?: string
+          id?: string
+          last_name?: string
+          tagline?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -564,6 +601,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {},
   },

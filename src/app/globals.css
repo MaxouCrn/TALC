@@ -1,26 +1,57 @@
+/* ========================================================================
+   Entrée CSS principale Next.js — Tailwind v4 + DA TALC.
+
+   Ordre :
+   1. Tailwind core (preflight + utilities)
+   2. Tokens bruts (source de vérité DA, réutilisables hors Tailwind)
+   3. @theme : expose les tokens comme variables Tailwind → génère les
+      utilitaires (bg-paper, text-ink, font-display, …)
+   4. Layer components : DA réécrite en classes sémantiques (hero,
+      post-card, footer, …), importée depuis src/styles.
+   ======================================================================== */
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* 1. Tokens bruts. Expose --paper, --ink, --font-display, etc. */
+@import "../styles/tokens.css";
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* 2. Composants DA. Chargés dans le layer components pour que les
+      utilitaires Tailwind puissent override au cas par cas. */
+@import "../styles/base/reset.css" layer(base);
+@import "../styles/base/typography.css" layer(components);
+@import "../styles/base/grain.css" layer(base);
+@import "../styles/components/topbar.css" layer(components);
+@import "../styles/components/nav.css" layer(components);
+@import "../styles/components/hero.css" layer(components);
+@import "../styles/components/button.css" layer(components);
+@import "../styles/components/card-news.css" layer(components);
+@import "../styles/components/card-activity.css" layer(components);
+@import "../styles/components/card-post.css" layer(components);
+@import "../styles/components/practical.css" layer(components);
+@import "../styles/components/footer.css" layer(components);
+@import "../styles/utilities/animations.css" layer(utilities);
+@import "../styles/utilities/responsive.css" layer(utilities);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* 3. Theme Tailwind — aliase nos tokens vers le naming convention
+      Tailwind v4 pour générer les utilitaires. */
+@theme {
+  /* Couleurs → bg-paper, text-ink, border-accent, … */
+  --color-paper:        var(--paper);
+  --color-paper-deep:   var(--paper-deep);
+  --color-ink:          var(--ink);
+  --color-ink-soft:     var(--ink-soft);
+  --color-rule:         var(--rule);
+  --color-accent:       var(--accent);
+  --color-accent-deep:  var(--accent-deep);
+  --color-sepia:        var(--sepia);
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Polices → font-display, font-body.
+     Les var(--font-*) sont injectées par next/font/google dans layout.tsx. */
+  --font-display: var(--font-im-fell),   "IM Fell DW Pica", "EB Garamond", Georgia, serif;
+  --font-body:    var(--font-eb-garamond), "EB Garamond", Georgia, serif;
+
+  /* Tailles max → max-w-page */
+  --container-page: var(--page-max);
+
+  /* Easings personnalisés → ease-[--ease-out] restent accessibles via var() */
 }

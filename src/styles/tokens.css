@@ -17,13 +17,13 @@
   --sepia:        #6f5a3d;   /* meta, labels discrets, ambiance vintage */
 
   /* -------- Fonts --------
-     Chargées via Google Fonts dans le <head> du HTML :
-     - IM Fell DW Pica         → display gravure almanach (titres, badges)
-     - IM Fell DW Pica (italic)→ accents italique (em)
-     - EB Garamond             → corps de texte, lisible, italique pour ambiance
+     Les var(--font-im-fell) et var(--font-eb-garamond) sont injectées par
+     next/font/google via layout.tsx. En contexte standalone (mockup HTML),
+     elles sont undefined → fallback naturel sur les noms chargés par le
+     <link> Google Fonts.
   */
-  --font-display: "IM Fell DW Pica", "EB Garamond", Georgia, serif;
-  --font-body:    "EB Garamond", Georgia, serif;
+  --font-display: var(--font-im-fell),   "IM Fell DW Pica", "EB Garamond", Georgia, serif;
+  --font-body:    var(--font-eb-garamond), "EB Garamond", Georgia, serif;
 
   /* -------- Type scale -------- */
   --fs-xs:   13px;

@@ -1,0 +1,148 @@
+/* ========================================================================
+   Account — pages /profil et /parametres. Layout commun : section
+   centrée avec masthead + card en paper sur shadow rouge théâtre.
+   ======================================================================== */
+
+.account-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 22px 80px;
+}
+
+.account-head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.account-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.account-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4.5vw, 48px);
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.account-title em { font-style: italic; color: var(--accent-deep); }
+.account-sub {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.account-card {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  padding: 32px 36px;
+  box-shadow:
+    6px 6px 0 0 var(--accent-deep),
+    6px 6px 0 1.5px var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.account-card::before,
+.account-card::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  height: 4px;
+  pointer-events: none;
+}
+.account-card::before { top: 10px;    border-top: 2px solid var(--rule);   border-bottom: 0.5px solid var(--rule); }
+.account-card::after  { bottom: 10px; border-top: 0.5px solid var(--rule); border-bottom: 2px solid var(--rule); }
+
+/* ---- Identity block (avatar + nom) ---- */
+.account-identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 0.5px solid var(--rule);
+}
+.account-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid var(--ink);
+  background-color: var(--paper-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.account-identity-text .account-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.account-identity-text .account-email {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ---- Meta list ---- */
+.account-meta {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  row-gap: 14px;
+  column-gap: 24px;
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+.account-meta dt {
+  font-weight: 500;
+  color: var(--sepia);
+  letter-spacing: 0.02em;
+}
+.account-meta dd { color: var(--ink); }
+
+@media (max-width: 640px) {
+  .account-meta { grid-template-columns: 1fr; row-gap: 4px; }
+  .account-meta dt { margin-top: 10px; }
+  .account-identity { flex-direction: column; text-align: center; gap: 14px; }
+}
+
+/* ---- Placeholder "bientôt disponible" ---- */
+.account-placeholder {
+  padding: 48px 24px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.account-placeholder-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 4px 12px;
+  border: 1px solid var(--accent);
+  margin-bottom: 18px;
+}

@@ -11,23 +11,32 @@ export default function UserMenu({ user }: { user: CurrentUser }) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Click-outside + Escape → fermer
+  // Hover open / leave close avec petit delai pour tolerer la traversee
+  // du gap trigger <-> panel.
+  function cancelClose() {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }
+  function scheduleClose() {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpen(false), 160);
+  }
+
+  // Escape → fermer (a11y keyboard)
   useEffect(() => {
     if (!open) return;
-    const handleClick = (e: MouseEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
-    };
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-    document.addEventListener("mousedown", handleClick);
     document.addEventListener("keydown", handleKey);
-    return () => {
-      document.removeEventListener("mousedown", handleClick);
-      document.removeEventListener("keydown", handleKey);
-    };
+    return () => document.removeEventListener("keydown", handleKey);
   }, [open]);
+
+  useEffect(() => () => cancelClose(), []);
 
   async function handleSignOut() {
     setBusy(true);
@@ -50,7 +59,24 @@ export default function UserMenu({ user }: { user: CurrentUser }) {
     .toUpperCase();
 
   return (
-    <div className="user-menu" ref={rootRef}>
+    <div
+      className="user-menu"
+      ref={rootRef}
+      onMouseEnter={() => {
+        cancelClose();
+        setOpen(true);
+      }}
+      onMouseLeave={scheduleClose}
+      onFocus={() => {
+        cancelClose();
+        setOpen(true);
+      }}
+      onBlur={(e) => {
+        if (!rootRef.current?.contains(e.relatedTarget as Node)) {
+          scheduleClose();
+        }
+      }}
+    >
       <button
         type="button"
         className="user-menu-trigger"

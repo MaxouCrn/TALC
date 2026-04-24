@@ -1,0 +1,135 @@
+/* ========================================================================
+   Card activité — grille "Nos activités".
+   ======================================================================== */
+
+.activities {
+  max-width: var(--page-max);
+  margin: 110px auto 60px;
+  padding: 80px var(--page-gutter);
+  background: var(--paper-deep);
+  position: relative;
+}
+.activities::before,
+.activities::after {
+  content: "";
+  position: absolute;
+  left: var(--page-gutter);
+  right: var(--page-gutter);
+  height: 4px;
+  border-top: 2px solid var(--rule);
+  border-bottom: 0.5px solid var(--rule);
+}
+.activities::before { top: 14px; }
+.activities::after  { bottom: 14px; }
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 64px;
+  background: var(--rule);
+  border: 1.5px solid var(--rule);
+}
+
+.activity {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  padding: 0;
+  position: relative;
+  transition: background var(--dur-base) ease;
+}
+.activity:hover { background: var(--paper-deep); }
+
+.activity-media {
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  margin: 0;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.activity-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(26, 22, 20, 0) 50%, rgba(26, 22, 20, 0.35) 100%);
+  pointer-events: none;
+}
+.activity-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.1) brightness(0.95);
+  transition:
+    filter var(--dur-slow) ease,
+    transform 0.8s var(--ease-out);
+}
+.activity:hover .activity-media img {
+  filter: grayscale(0) sepia(0.15) contrast(1.05) brightness(1);
+  transform: scale(1.04);
+}
+
+.activity-body {
+  padding: 28px 30px 32px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.activity-plate {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.activity-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-4xl);
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.activity-meta {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  margin-bottom: 14px;
+}
+
+.activity-desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.activity-cta {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  align-self: flex-start;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: all var(--dur-base) ease;
+}
+.activity:hover .activity-cta {
+  letter-spacing: 0.22em;
+  color: var(--accent-deep);
+}
+
+.activities-footer {
+  text-align: center;
+  margin-top: 56px;
+}

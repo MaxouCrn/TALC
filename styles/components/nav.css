@@ -1,0 +1,68 @@
+/* ========================================================================
+   Nav masthead — sticky top. État .is-stuck ajouté par JS quand collée.
+   ======================================================================== */
+
+nav.masthead-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  padding: 18px var(--page-gutter);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--paper);
+  border-bottom: 1px solid rgba(26, 22, 20, 0);
+  transition:
+    background var(--dur-base) ease,
+    border-color var(--dur-base) ease,
+    box-shadow var(--dur-base) ease,
+    padding var(--dur-base) ease;
+}
+
+nav.masthead-nav.is-stuck {
+  background: rgba(242, 236, 224, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom-color: rgba(26, 22, 20, 0.22);
+  box-shadow: 0 2px 14px -8px rgba(26, 22, 20, 0.35);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+nav.masthead-nav a {
+  position: relative;
+  padding-bottom: 2px;
+  transition: color var(--dur-fast) ease;
+}
+nav.masthead-nav a:hover { color: var(--accent); }
+nav.masthead-nav a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: all var(--dur-base) ease;
+  transform: translateX(-50%);
+}
+nav.masthead-nav a:hover::after { width: 100%; }
+
+nav.masthead-nav .sep {
+  color: var(--accent);
+  align-self: center;
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+.nav-cta {
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+.nav-cta::after { background: var(--accent); }

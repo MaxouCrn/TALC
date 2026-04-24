@@ -1,0 +1,77 @@
+/* ========================================================================
+   Hero — section principale de la home.
+   ======================================================================== */
+
+.hero {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 48px var(--page-gutter) 80px;
+  text-align: center;
+  position: relative;
+}
+
+.hero .ornament { margin: 14px 0 18px; }
+.hero .eyebrow { margin-bottom: 38px; display: block; }
+
+.logo-wrap {
+  display: inline-block;
+  margin: 14px 0 30px;
+  position: relative;
+}
+.logo-wrap::before,
+.logo-wrap::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  font-size: 14px;
+  color: var(--accent);
+  transform: translateY(-50%);
+}
+.logo-wrap::before { left: -56px; }
+.logo-wrap::after  { right: -56px; }
+.logo-wrap img {
+  display: block;
+  width: 360px;
+  max-width: 60vw;
+  filter: contrast(1.05);
+}
+
+h1.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(44px, 7.2vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 16px 0 10px;
+}
+h1.title em { font-style: italic; color: var(--accent-deep); }
+
+.subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(18px, 1.8vw, 24px);
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 0 auto 34px;
+  line-height: 1.45;
+}
+
+.cta-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 12px;
+}
+
+/* Corner flourishes */
+.flourish {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  opacity: 0.85;
+}
+.flourish.tl { top: 14px;    left: 14px;  border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
+.flourish.tr { top: 14px;    right: 14px; border-top: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+.flourish.bl { bottom: 14px; left: 14px;  border-bottom: 2px solid var(--ink); border-left: 2px solid var(--ink); }
+.flourish.br { bottom: 14px; right: 14px; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); }

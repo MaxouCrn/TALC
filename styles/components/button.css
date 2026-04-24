@@ -1,0 +1,59 @@
+/* ========================================================================
+   Boutons — .btn, .btn-primary, .btn-ghost, plus variantes outline compactes.
+   ======================================================================== */
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.btn-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-ghost {
+  background: transparent;
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Lien compact "Tout voir →", partagé par News et Activities */
+.link-all,
+.all-news,
+.all-activities {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-base);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 14px 30px;
+  border: 1.5px solid var(--ink);
+  transition: all var(--dur-base) ease;
+  display: inline-flex;
+}
+.link-all:hover,
+.all-news:hover,
+.all-activities:hover { background: var(--ink); color: var(--paper); }

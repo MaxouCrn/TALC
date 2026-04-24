@@ -1,0 +1,73 @@
+/* ========================================================================
+   Topbar — bandeau info (date + prochain évènement + CTA billetterie).
+   ======================================================================== */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px var(--page-gutter);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--ink-soft);
+  border-bottom: 1px solid rgba(26, 22, 20, 0.18);
+  position: relative;
+}
+
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: var(--page-gutter);
+  right: var(--page-gutter);
+  bottom: -5px;
+  border-bottom: 1px solid rgba(26, 22, 20, 0.18);
+}
+
+.topbar .date {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--fs-md);
+  color: var(--ink-soft);
+}
+
+.topbar .next-event {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.topbar .next-event .label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.topbar .next-event .label::before {
+  content: "❦";
+  margin-right: 10px;
+  color: var(--accent);
+  letter-spacing: 0;
+}
+.topbar .next-event .title-evt {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-md);
+  color: var(--ink);
+}
+
+.topbar-cta {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  transition: all var(--dur-base) ease;
+}
+.topbar-cta:hover {
+  background: var(--accent);
+  color: var(--paper);
+}

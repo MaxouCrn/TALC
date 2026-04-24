@@ -66,3 +66,13 @@ nav.masthead-nav .sep {
   font-weight: 600;
 }
 .nav-cta::after { background: var(--accent); }
+
+/* Auth slot (UserMenu ou CTA) absolu à droite — garde les liens centrés */
+nav.masthead-nav .nav-auth {
+  position: absolute;
+  right: var(--page-gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+}

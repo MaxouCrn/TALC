@@ -16,6 +16,7 @@ import type { CurrentUser } from "@/lib/data/current-user";
 type NavLink = { label: string; href: string };
 
 const LINKS: NavLink[] = [
+  { label: "Accueil",    href: "/" },
   { label: "Le Club",    href: "#" },
   { label: "Activités",  href: "#" },
   { label: "Actualités", href: "#" },
@@ -54,15 +55,15 @@ export default function Nav({ user }: { user: CurrentUser | null }) {
           </span>
         ))}
 
-        <span className="sep">·</span>
-
-        {user ? (
-          <UserMenu user={user} />
-        ) : (
-          <Link href="/auth" className="nav-cta">
-            Se connecter / S&apos;inscrire
-          </Link>
-        )}
+        <div className="nav-auth">
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <Link href="/auth" className="nav-cta">
+              Se connecter / S&apos;inscrire
+            </Link>
+          )}
+        </div>
       </nav>
     </>
   );

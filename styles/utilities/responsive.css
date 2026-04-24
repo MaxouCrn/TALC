@@ -1,0 +1,42 @@
+/* ========================================================================
+   Responsive — tous les overrides media-queries centralisés.
+   ======================================================================== */
+
+@media (max-width: 900px) {
+  .topbar,
+  nav.masthead-nav,
+  .hero {
+    padding-left: var(--page-gutter-mobile);
+    padding-right: var(--page-gutter-mobile);
+  }
+
+  .topbar { flex-direction: column; gap: 6px; text-align: center; }
+  nav.masthead-nav { flex-wrap: wrap; gap: 14px; }
+
+  .logo-wrap::before,
+  .logo-wrap::after { display: none; }
+
+  .news-grid { grid-template-columns: 1fr; gap: 40px; }
+  .news { padding: 0 var(--page-gutter-mobile); margin-top: 60px; }
+
+  .activities { padding: 56px var(--page-gutter-mobile); margin-top: 80px; }
+  .activities-grid { grid-template-columns: 1fr; }
+  .activity-name { font-size: 28px; }
+
+  .feed-preview { padding: 0 var(--page-gutter-mobile); margin-top: 60px; }
+  .posts-row { grid-template-columns: 1fr; gap: 28px; }
+  .invite-actions { flex-direction: column; gap: 12px; }
+
+  .practical { padding: 0 var(--page-gutter-mobile); margin-top: 60px; }
+  .practical-grid { grid-template-columns: 1fr; gap: 40px; }
+  .map-frame { aspect-ratio: 4 / 3; }
+
+  .site-footer { padding: 56px var(--page-gutter-mobile) 24px; margin-top: 80px; }
+  .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .activities-grid { grid-template-columns: repeat(2, 1fr); }
+}

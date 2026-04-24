@@ -18,6 +18,8 @@
 @import url("./components/card-post.css");
 @import url("./components/practical.css");
 @import url("./components/footer.css");
+@import url("./components/form.css");
+@import url("./components/auth.css");
 
 @import url("./utilities/animations.css");
 @import url("./utilities/responsive.css");

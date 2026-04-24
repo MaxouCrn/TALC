@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ACTIVITIES, type Activity } from "@/lib/mock-data";
+import { fetchActivities } from "@/lib/data/activities";
+import type { Activity } from "@/lib/mock-data";
 
 function ActivityTile({ activity }: { activity: Activity }) {
   return (
@@ -19,7 +20,10 @@ function ActivityTile({ activity }: { activity: Activity }) {
   );
 }
 
-export default function ActivitiesSection() {
+export default async function ActivitiesSection() {
+  const items = await fetchActivities();
+  if (items.length === 0) return null;
+
   return (
     <section className="activities">
       <header className="section-head">
@@ -38,7 +42,7 @@ export default function ActivitiesSection() {
       </header>
 
       <div className="activities-grid">
-        {ACTIVITIES.map((a) => (
+        {items.map((a) => (
           <ActivityTile key={a.id} activity={a} />
         ))}
       </div>

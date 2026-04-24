@@ -1,8 +1,11 @@
 import Link from "next/link";
 import PostCard from "@/components/feed/PostCard";
-import { POSTS } from "@/lib/mock-data";
+import { fetchLatestPosts } from "@/lib/data/posts";
 
-export default function FeedPreview() {
+export default async function FeedPreview() {
+  const posts = await fetchLatestPosts(3);
+  if (posts.length === 0) return null;
+
   return (
     <section className="feed-preview">
       <header className="section-head">
@@ -22,7 +25,7 @@ export default function FeedPreview() {
       </header>
 
       <div className="posts-row">
-        {POSTS.map((post) => (
+        {posts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
       </div>

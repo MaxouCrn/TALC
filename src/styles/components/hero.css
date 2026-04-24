@@ -32,6 +32,7 @@
 .logo-wrap img {
   display: block;
   width: 360px;
+  height: auto;
   max-width: 60vw;
   filter: contrast(1.05);
 }

@@ -27,6 +27,7 @@ export default function Home() {
           height={260}
           priority
           unoptimized
+          style={{ width: "100%", height: "auto" }}
         />
       </div>
 

@@ -7,14 +7,16 @@
 
 :root {
   /* -------- Colors -------- */
-  --paper:        #f2ece0;   /* fond principal, ton papier chaud */
-  --paper-deep:   #e8dfce;   /* fond secondaire (sections contrastées, hover) */
-  --ink:          #1a1614;   /* texte principal, encre sombre (pas noir pur) */
-  --ink-soft:     #2d2622;   /* texte secondaire, contraste réduit */
+  --paper:        #fce5f1;   /* rose pâle, fond page principal */
+  --paper-deep:   #f7d4e6;   /* rose moyen, sections alternées + hover */
+  --rose:         #ee85c0;   /* rose bonbon TALC, bandes signatures */
+  --cream:        #f2ece0;   /* papier vintage, cards signature */
+  --ink:          #1a1614;   /* texte principal */
+  --ink-soft:     #2d2622;   /* texte secondaire */
   --rule:         #2d2622;   /* filets décoratifs */
-  --accent:       #8b1a1a;   /* rouge théâtre — à utiliser avec parcimonie */
-  --accent-deep:  #6a1313;   /* rouge plus sombre, hover états actifs */
-  --sepia:        #6f5a3d;   /* meta, labels discrets, ambiance vintage */
+  --accent:       #c2185b;   /* fuchsia profond, CTA + liens + ornements */
+  --accent-deep:  #8e1244;   /* fuchsia hover/active */
+  --sepia:        #6f5a3d;   /* meta vintage, labels discrets */
 
   /* -------- Fonts --------
      Les var(--font-im-fell) et var(--font-eb-garamond) sont injectées par

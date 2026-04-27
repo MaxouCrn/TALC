@@ -22,13 +22,13 @@
 }
 
 .btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
+  background: var(--accent);
+  color: var(--cream);
+  border-color: var(--accent);
 }
 .btn-primary:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
 }
 
 .btn-ghost {

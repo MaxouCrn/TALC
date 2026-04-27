@@ -1,0 +1,126 @@
+<!doctype html>
+<!-- Variante 1 : Affiche centrée resserrée — stack vertical centré, logo agrandi (380px max),
+     espacements réduits, titre + subtitle serrés, 2 CTAs côte-à-côte centrés. Sans décor. -->
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TALC — Hero Variante 1 : Centrée resserrée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+DW+Pica+SC&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet" />
+<link rel="stylesheet" href="../src/styles/main.css" />
+<style>
+  /* === Variante 1 : centré resserré === */
+
+  /* Réduction des espacements verticaux du hero */
+  .hero.hero-v1 {
+    padding-top: 48px;
+    padding-bottom: 56px;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero.hero-v1 .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  /* Logo plus grand */
+  .hero.hero-v1 .logo-wrap {
+    margin-bottom: 20px;
+  }
+  .hero.hero-v1 .logo-wrap img {
+    max-width: 380px;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Titre serré */
+  .hero.hero-v1 .title {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  /* Subtitle directement sous le titre */
+  .hero.hero-v1 .subtitle {
+    margin-top: 0;
+    margin-bottom: 28px;
+    max-width: 580px;
+  }
+
+  /* CTAs côte-à-côte centrés */
+  .hero.hero-v1 .cta-row {
+    justify-content: center;
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .hero.hero-v1 .logo-wrap img {
+      max-width: 260px;
+    }
+    .hero.hero-v1 .cta-row {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP RIBBON — info bar ============ -->
+<div class="topbar anim-fade d1">
+  <div class="date">Vendredi 24 avril 2026</div>
+  <a href="#" class="next-event">
+    <span class="label">Prochain évènement</span>
+    <span class="title-evt">Gala de danse &nbsp;·&nbsp; samedi 14 juin 2026</span>
+  </a>
+  <a href="#" class="topbar-cta">Billetterie &nbsp;→</a>
+</div>
+
+<!-- ============ MASTHEAD NAV ============ -->
+<nav class="masthead-nav anim-fade d2">
+  <a href="#">Le Club</a>
+  <span class="sep">·</span>
+  <a href="#">Activités</a>
+  <span class="sep">·</span>
+  <a href="#">Actualités</a>
+  <span class="sep">·</span>
+  <a href="#">Feed</a>
+  <span class="sep">·</span>
+  <a href="#">Contact</a>
+  <span class="sep">·</span>
+  <a href="#" class="nav-cta">Se connecter / S'inscrire</a>
+</nav>
+
+<!-- ============ HERO : Variante 1 ============ -->
+<section class="hero hero-v1">
+  <div class="eyebrow anim-rise d3">Fondé en 1985 &nbsp;·&nbsp; Association Loi 1901</div>
+
+  <div class="logo-wrap anim-rise d4">
+    <img src="../public/logo-talc.gif" alt="Logo TALC" />
+  </div>
+
+  <h1 class="title anim-rise d4">
+    Tatinghem <em>Arts</em><br />
+    Loisirs &amp; <em>Culture</em>
+  </h1>
+
+  <p class="subtitle anim-rise d5">
+    Depuis quarante années, le TALC réunit danseurs, peintres,
+    comédiens et familles autour d'un même feu&nbsp;: vivre ensemble, créer ensemble,
+    se souvenir ensemble. Adhérez, suivez vos proches, conservez la mémoire des saisons.
+  </p>
+
+  <div class="cta-row anim-rise d6">
+    <a href="#" class="btn btn-primary">Rejoindre le Club</a>
+    <a href="#" class="btn btn-ghost">Lire les actualités</a>
+  </div>
+</section>
+
+</body>
+</html>

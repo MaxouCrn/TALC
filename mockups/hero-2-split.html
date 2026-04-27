@@ -1,0 +1,176 @@
+<!doctype html>
+<!-- Variante 2 : Split horizontal éditorial — grid 2 colonnes 50/50 desktop.
+     Gauche : eyebrow + titre H1 (left) + subtitle + CTAs. Droite : logo grand centré.
+     Mobile : logo d'abord, puis contenu textuel. Style magazine asymétrique. -->
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TALC — Hero Variante 2 : Split éditorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+DW+Pica+SC&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet" />
+<link rel="stylesheet" href="../src/styles/main.css" />
+<style>
+  /* === Variante 2 : split horizontal éditorial === */
+
+  .hero.hero-v2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "content logo";
+    align-items: center;
+    gap: 0;
+    padding: 72px 80px;
+    text-align: left;
+    min-height: 560px;
+  }
+
+  .hero.hero-v2 .hero-content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 64px;
+    border-right: 1px solid var(--rose);
+  }
+
+  .hero.hero-v2 .hero-logo-col {
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 64px;
+  }
+
+  .hero.hero-v2 .hero-logo-col img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+  }
+
+  .hero.hero-v2 .eyebrow {
+    margin-bottom: 24px;
+    text-align: left;
+  }
+
+  .hero.hero-v2 .title {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: clamp(36px, 4vw, 64px);
+  }
+
+  .hero.hero-v2 .subtitle {
+    text-align: left;
+    margin-bottom: 32px;
+    max-width: 480px;
+  }
+
+  .hero.hero-v2 .cta-row {
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  /* Mobile : logo en premier, puis contenu */
+  @media (max-width: 767px) {
+    .hero.hero-v2 {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "logo"
+        "content";
+      padding: 40px 24px;
+      min-height: auto;
+      text-align: center;
+    }
+
+    .hero.hero-v2 .hero-content {
+      align-items: center;
+      padding-right: 0;
+      border-right: none;
+      border-top: 1px solid var(--rose);
+      padding-top: 32px;
+    }
+
+    .hero.hero-v2 .hero-logo-col {
+      padding-left: 0;
+      padding-bottom: 32px;
+    }
+
+    .hero.hero-v2 .hero-logo-col img {
+      max-width: 280px;
+    }
+
+    .hero.hero-v2 .eyebrow,
+    .hero.hero-v2 .title,
+    .hero.hero-v2 .subtitle {
+      text-align: center;
+    }
+
+    .hero.hero-v2 .cta-row {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP RIBBON — info bar ============ -->
+<div class="topbar anim-fade d1">
+  <div class="date">Vendredi 24 avril 2026</div>
+  <a href="#" class="next-event">
+    <span class="label">Prochain évènement</span>
+    <span class="title-evt">Gala de danse &nbsp;·&nbsp; samedi 14 juin 2026</span>
+  </a>
+  <a href="#" class="topbar-cta">Billetterie &nbsp;→</a>
+</div>
+
+<!-- ============ MASTHEAD NAV ============ -->
+<nav class="masthead-nav anim-fade d2">
+  <a href="#">Le Club</a>
+  <span class="sep">·</span>
+  <a href="#">Activités</a>
+  <span class="sep">·</span>
+  <a href="#">Actualités</a>
+  <span class="sep">·</span>
+  <a href="#">Feed</a>
+  <span class="sep">·</span>
+  <a href="#">Contact</a>
+  <span class="sep">·</span>
+  <a href="#" class="nav-cta">Se connecter / S'inscrire</a>
+</nav>
+
+<!-- ============ HERO : Variante 2 ============ -->
+<section class="hero hero-v2">
+
+  <!-- Colonne gauche : contenu -->
+  <div class="hero-content">
+    <div class="eyebrow anim-rise d3">Fondé en 1985 &nbsp;·&nbsp; Association Loi 1901</div>
+
+    <h1 class="title anim-rise d4">
+      Tatinghem <em>Arts</em><br />
+      Loisirs &amp; <em>Culture</em>
+    </h1>
+
+    <p class="subtitle anim-rise d5">
+      Depuis quarante années, le TALC réunit danseurs, peintres,
+      comédiens et familles autour d'un même feu&nbsp;: vivre ensemble, créer ensemble,
+      se souvenir ensemble. Adhérez, suivez vos proches, conservez la mémoire des saisons.
+    </p>
+
+    <div class="cta-row anim-rise d6">
+      <a href="#" class="btn btn-primary">Rejoindre le Club</a>
+      <a href="#" class="btn btn-ghost">Lire les actualités</a>
+    </div>
+  </div>
+
+  <!-- Colonne droite : logo -->
+  <div class="hero-logo-col anim-fade d4">
+    <img src="../public/logo-talc.gif" alt="Logo TALC" />
+  </div>
+
+</section>
+
+</body>
+</html>

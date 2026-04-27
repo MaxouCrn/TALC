@@ -34,12 +34,12 @@
 .activity {
   display: flex;
   flex-direction: column;
-  background: var(--paper);
+  background: var(--cream);
   padding: 0;
   position: relative;
   transition: background var(--dur-base) ease;
 }
-.activity:hover { background: var(--paper-deep); }
+.activity:hover { background: #ebe1cd; }
 
 .activity-media {
   aspect-ratio: 5 / 4;

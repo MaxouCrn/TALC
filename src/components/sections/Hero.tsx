@@ -3,18 +3,6 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section className="hero">
-      <div className="flourish tl" />
-      <div className="flourish tr" />
-      <div className="flourish bl" />
-      <div className="flourish br" />
-
-      <div className="double-rule">
-        <span />
-        <span />
-      </div>
-
-      <div className="ornament">❦ ❧ ❦</div>
-
       <div className="eyebrow">
         Fondé en 1985 &nbsp;·&nbsp; Association Loi 1901
       </div>
@@ -53,10 +41,6 @@ export default function Hero() {
         </a>
       </div>
 
-      <div className="double-rule" style={{ marginTop: 60 }}>
-        <span />
-        <span />
-      </div>
     </section>
   );
 }

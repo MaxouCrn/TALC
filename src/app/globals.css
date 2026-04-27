@@ -43,6 +43,8 @@
   /* Couleurs → bg-paper, text-ink, border-accent, … */
   --color-paper:        var(--paper);
   --color-paper-deep:   var(--paper-deep);
+  --color-rose:         var(--rose);
+  --color-cream:        var(--cream);
   --color-ink:          var(--ink);
   --color-ink-soft:     var(--ink-soft);
   --color-rule:         var(--rule);

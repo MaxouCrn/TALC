@@ -66,14 +66,6 @@ h1.title em { font-style: italic; color: var(--accent-deep); }
   margin-top: 12px;
 }
 
-/* Corner flourishes */
-.flourish {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  opacity: 0.85;
-}
-.flourish.tl { top: 14px;    left: 14px;  border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
-.flourish.tr { top: 14px;    right: 14px; border-top: 2px solid var(--ink); border-right: 2px solid var(--ink); }
-.flourish.bl { bottom: 14px; left: 14px;  border-bottom: 2px solid var(--ink); border-left: 2px solid var(--ink); }
-.flourish.br { bottom: 14px; right: 14px; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+.flourish { display: none; }
+
+.hero { position: relative; }

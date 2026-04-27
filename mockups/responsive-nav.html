@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TALC — Responsive nav + topbar mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+DW+Pica+SC&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet" />
+<link rel="stylesheet" href="../src/styles/main.css" />
+<style>
+  /* ============================================================
+     Mockup harness — affiche frame mobile + tablette + desktop
+     côte à côte pour comparer. Pas migré au design system.
+     ============================================================ */
+  body {
+    background: #2a2522;
+    padding: 32px 24px;
+    min-height: 100vh;
+  }
+  .mockup-grid {
+    display: grid;
+    grid-template-columns: 380px 760px 1fr;
+    gap: 32px;
+    align-items: start;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  @media (max-width: 1400px) {
+    .mockup-grid { grid-template-columns: 380px 1fr; }
+    .mockup-grid .frame-desktop { display: none; }
+  }
+  @media (max-width: 900px) {
+    .mockup-grid { grid-template-columns: 1fr; }
+    .mockup-grid .frame-tablet { display: none; }
+  }
+
+  .frame {
+    background: var(--paper);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,.5);
+    position: relative;
+  }
+  .frame-mobile  { width: 380px;  }
+  .frame-tablet  { width: 760px;  }
+  .frame-desktop { width: 100%; min-width: 1100px; }
+
+  .frame-label {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    z-index: 5;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: rgba(255,255,255,.7);
+    background: rgba(0,0,0,.4);
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Force breakpoint à l'intérieur des frames pour aperçu fidèle */
+  .frame-mobile  .frame-inner { width: 380px;  }
+  .frame-tablet  .frame-inner { width: 760px;  }
+
+  .demo-content {
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="mockup-grid">
+
+  <!-- =================== FRAME MOBILE =================== -->
+  <div class="frame frame-mobile" data-bp="mobile">
+    <span class="frame-label">mobile · 380px</span>
+    <div class="frame-inner">
+
+      <!-- Topbar mobile : 2 lignes -->
+      <div class="topbar topbar--mobile">
+        <div class="topbar-row-top">
+          <div class="date">Lundi 27 avril 2026</div>
+          <a href="#" class="topbar-cta">Billetterie&nbsp;→</a>
+        </div>
+        <a href="#" class="next-event">
+          <span class="label">Prochain évènement</span>
+          <span class="title-evt">Gala de danse · 14 juin</span>
+        </a>
+      </div>
+
+      <!-- Nav mobile : burger / titre -->
+      <nav class="masthead-nav masthead-nav--mobile">
+        <button class="nav-burger" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+          <span></span><span></span><span></span>
+        </button>
+        <a href="/" class="nav-brand">TALC</a>
+      </nav>
+
+      <div class="demo-content">— contenu de la page —</div>
+    </div>
+  </div>
+
+  <!-- =================== FRAME TABLETTE =================== -->
+  <div class="frame frame-tablet" data-bp="tablet">
+    <span class="frame-label">tablet · 760px</span>
+    <div class="frame-inner">
+
+      <div class="topbar topbar--mobile">
+        <div class="topbar-row-top">
+          <div class="date">Lundi 27 avril 2026</div>
+          <a href="#" class="topbar-cta">Billetterie&nbsp;→</a>
+        </div>
+        <a href="#" class="next-event">
+          <span class="label">Prochain évènement</span>
+          <span class="title-evt">Gala de danse · samedi 14 juin 2026</span>
+        </a>
+      </div>
+
+      <nav class="masthead-nav masthead-nav--mobile">
+        <button class="nav-burger" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+          <span></span><span></span><span></span>
+        </button>
+        <a href="/" class="nav-brand">TALC</a>
+      </nav>
+
+      <div class="demo-content">— contenu de la page —</div>
+    </div>
+  </div>
+
+  <!-- =================== FRAME DESKTOP =================== -->
+  <div class="frame frame-desktop" data-bp="desktop">
+    <span class="frame-label">desktop · 1100px+</span>
+    <div class="frame-inner">
+
+      <div class="topbar anim-fade d1">
+        <div class="date">Lundi 27 avril 2026</div>
+        <a href="#" class="next-event">
+          <span class="label">Prochain évènement</span>
+          <span class="title-evt">Gala de danse &nbsp;·&nbsp; samedi 14 juin 2026</span>
+        </a>
+        <a href="#" class="topbar-cta">Billetterie &nbsp;→</a>
+      </div>
+
+      <nav class="masthead-nav anim-fade d2">
+        <a href="#">Accueil</a>
+        <span class="sep">·</span>
+        <a href="#">Le Club</a>
+        <span class="sep">·</span>
+        <a href="#">Activités</a>
+        <span class="sep">·</span>
+        <a href="#">Actualités</a>
+        <span class="sep">·</span>
+        <a href="#">Feed</a>
+        <span class="sep">·</span>
+        <a href="#">Contact</a>
+        <div class="nav-auth">
+          <button class="user-menu-trigger">
+            <span class="user-avatar">MC</span>
+            <span class="user-name">Maxime Caron</span>
+            <span class="user-caret">▾</span>
+          </button>
+        </div>
+      </nav>
+
+      <div class="demo-content">— contenu de la page —</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- =================== DRAWER (overlay nav mobile) =================== -->
+<div class="nav-drawer" data-drawer hidden>
+  <div class="nav-drawer-backdrop" data-drawer-close></div>
+  <aside class="nav-drawer-panel" role="dialog" aria-label="Menu principal">
+    <button class="nav-drawer-close" data-drawer-close aria-label="Fermer">×</button>
+
+    <!-- Identité utilisateur connecté (en haut du drawer) -->
+    <div class="nav-drawer-user">
+      <span class="user-avatar user-avatar--compact">MC</span>
+      <div class="nav-drawer-user-meta">
+        <span class="nav-drawer-user-name">Maxime Caron</span>
+        <a href="/profil" class="nav-drawer-user-link">Mon profil</a>
+      </div>
+    </div>
+
+    <ul class="nav-drawer-list">
+      <li><a href="/">Accueil</a></li>
+      <li><a href="#">Le Club</a></li>
+      <li><a href="#">Activités</a></li>
+      <li><a href="#">Actualités</a></li>
+      <li><a href="#">Feed</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+
+    <div class="nav-drawer-footer">
+      <!-- État connecté -->
+      <a href="/parametres" class="nav-drawer-secondary">Paramètres</a>
+      <button class="nav-drawer-secondary nav-drawer-danger">Se déconnecter</button>
+      <!-- État déconnecté (à afficher quand pas de user) :
+      <a href="/auth" class="nav-cta">Se connecter / S'inscrire</a>
+      -->
+    </div>
+  </aside>
+</div>
+
+<!-- =================== STYLES MOCKUP (à migrer dans nav.css/topbar.css) =================== -->
+<style>
+
+  /* ====== TOPBAR mobile/tablette ====== */
+  .topbar--mobile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 14px var(--page-gutter);
+  }
+  .topbar--mobile .topbar-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .topbar--mobile .date {
+    font-size: var(--fs-sm);
+  }
+  .topbar--mobile .topbar-cta {
+    padding: 6px 12px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .topbar--mobile .next-event {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    padding-top: 4px;
+    border-top: 0.5px dashed rgba(26,22,20,0.18);
+  }
+  .topbar--mobile .next-event .label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  .topbar--mobile .next-event .title-evt {
+    font-size: var(--fs-sm);
+  }
+  /* < 480px : on cache la date pour gagner de la place */
+  @media (max-width: 479px) {
+    .topbar--mobile .date { display: none; }
+    .topbar--mobile .topbar-row-top { justify-content: flex-end; }
+  }
+
+  /* ====== NAV mobile/tablette ====== */
+  .masthead-nav--mobile {
+    display: grid;
+    grid-template-columns: auto 1fr 36px; /* burger / brand / spacer pour symétrie */
+    align-items: center;
+    gap: 0;
+    padding: 12px var(--page-gutter);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .masthead-nav--mobile .nav-brand {
+    grid-column: 2;
+    justify-self: center;
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+  }
+  .masthead-nav--mobile .nav-brand::after { display: none; }
+
+  /* Burger */
+  .nav-burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .nav-burger span {
+    display: block;
+    height: 1.5px;
+    width: 100%;
+    background: var(--ink);
+    transition: transform var(--dur-base) ease, opacity var(--dur-fast) ease;
+  }
+  .nav-burger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-burger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .user-avatar--compact {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    background: var(--paper-deep);
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  /* ====== DRAWER ====== */
+  .nav-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+  }
+  .nav-drawer[hidden] { display: none; }
+  .nav-drawer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,22,20,0.55);
+    animation: drawer-fade var(--dur-base) ease both;
+  }
+  .nav-drawer-panel {
+    position: relative;
+    margin-left: auto;
+    width: min(86vw, 360px);
+    height: 100%;
+    background: var(--paper);
+    border-left: 1.5px solid var(--ink);
+    padding: 60px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    animation: drawer-slide var(--dur-base) var(--ease-out) both;
+  }
+  .nav-drawer-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .nav-drawer-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .nav-drawer-list li { border-bottom: 0.5px dashed rgba(26,22,20,0.18); }
+  .nav-drawer-list a {
+    display: block;
+    padding: 16px 4px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    text-transform: none;
+  }
+  .nav-drawer-list a:hover { color: var(--accent); }
+  .nav-drawer-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(26,22,20,0.18);
+  }
+  .nav-drawer-footer .nav-cta {
+    display: inline-block;
+    padding: 12px 18px;
+    border: 1px solid var(--accent);
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* User block en haut du drawer */
+  .nav-drawer-user {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(26,22,20,0.18);
+  }
+  .nav-drawer-user-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .nav-drawer-user-name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .nav-drawer-user-link {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* Footer drawer : actions secondaires empilées */
+  .nav-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .nav-drawer-secondary {
+    display: block;
+    padding: 12px 4px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .nav-drawer-secondary:hover { color: var(--accent); }
+  .nav-drawer-danger { color: var(--accent-deep); }
+  .nav-drawer-danger:hover { color: var(--accent); }
+
+  @keyframes drawer-fade { from { opacity: 0 } to { opacity: 1 } }
+  @keyframes drawer-slide {
+    from { transform: translateX(20px); opacity: 0 }
+    to   { transform: translateX(0);    opacity: 1 }
+  }
+
+</style>
+
+<script>
+  // Toggle drawer pour démo
+  const drawer = document.querySelector('[data-drawer]');
+  const burgers = document.querySelectorAll('[data-burger]');
+  const closers = document.querySelectorAll('[data-drawer-close]');
+
+  function openDrawer() {
+    drawer.hidden = false;
+    burgers.forEach(b => b.setAttribute('aria-expanded','true'));
+  }
+  function closeDrawer() {
+    drawer.hidden = true;
+    burgers.forEach(b => b.setAttribute('aria-expanded','false'));
+  }
+  burgers.forEach(b => b.addEventListener('click', openDrawer));
+  closers.forEach(c => c.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !drawer.hidden) closeDrawer();
+  });
+</script>
+
+</body>
+</html>

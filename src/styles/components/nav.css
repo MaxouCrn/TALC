@@ -1,5 +1,6 @@
 /* ========================================================================
    Nav masthead — sticky top. État .is-stuck ajouté par JS quand collée.
+   Responsive : > 900px = liens inline, ≤ 900px = burger + drawer.
    ======================================================================== */
 
 nav.masthead-nav {
@@ -26,7 +27,7 @@ nav.masthead-nav {
 }
 
 nav.masthead-nav.is-stuck {
-  background: rgba(242, 236, 224, 0.92);
+  background: rgba(252, 229, 241, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom-color: rgba(26, 22, 20, 0.22);
@@ -75,4 +76,226 @@ nav.masthead-nav .nav-auth {
   transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
+}
+
+/* Wrapper liens desktop — permet de toggler la visibilité au breakpoint mobile */
+.nav-links {
+  display: contents;
+}
+
+/* Éléments mobile masqués par défaut (desktop) */
+.nav-burger,
+.nav-brand-mobile {
+  display: none;
+}
+
+/* ====== Mobile / tablette ≤ 900px ====== */
+@media (max-width: 900px) {
+  nav.masthead-nav {
+    display: grid;
+    grid-template-columns: 36px 1fr 36px;
+    align-items: center;
+    gap: 0;
+    padding: 12px var(--page-gutter);
+    text-transform: none;
+    letter-spacing: 0;
+    justify-content: stretch;
+  }
+  /* Cache liens + auth desktop */
+  .nav-links,
+  nav.masthead-nav > .nav-auth {
+    display: none;
+  }
+  /* Affiche burger + brand */
+  .nav-burger {
+    display: inline-flex;
+    grid-column: 1;
+  }
+  .nav-brand-mobile {
+    display: inline-flex;
+    grid-column: 2;
+    justify-self: center;
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+  }
+  .nav-brand-mobile::after { display: none; }
+}
+
+/* ====== Burger button ====== */
+.nav-burger {
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.nav-burger span {
+  display: block;
+  height: 1.5px;
+  width: 100%;
+  background: var(--ink);
+  transition: transform var(--dur-base) ease, opacity var(--dur-fast) ease;
+}
+.nav-burger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ====== Drawer (overlay nav mobile) ====== */
+.nav-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+}
+.nav-drawer[hidden] { display: none; }
+.nav-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 22, 20, 0.55);
+  animation: drawer-fade var(--dur-base) ease both;
+}
+.nav-drawer-panel {
+  position: relative;
+  margin-left: auto;
+  width: min(86vw, 360px);
+  height: 100%;
+  background: var(--paper);
+  border-left: 1.5px solid var(--ink);
+  padding: 60px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: drawer-slide var(--dur-base) var(--ease-out) both;
+  overflow-y: auto;
+}
+.nav-drawer-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* User block en haut du drawer */
+.nav-drawer-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(26, 22, 20, 0.18);
+}
+.nav-drawer-user-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.nav-drawer-user-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+}
+.nav-drawer-user-link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+/* Liens drawer */
+.nav-drawer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-drawer-list li {
+  border-bottom: 0.5px dashed rgba(26, 22, 20, 0.18);
+}
+.nav-drawer-list a {
+  display: block;
+  padding: 16px 4px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-transform: none;
+}
+.nav-drawer-list a:hover { color: var(--accent); }
+.nav-drawer-list a::after { display: none; }
+
+/* Footer drawer : actions secondaires empilées */
+.nav-drawer-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(26, 22, 20, 0.18);
+}
+.nav-drawer-secondary {
+  display: block;
+  padding: 12px 4px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+.nav-drawer-secondary:hover { color: var(--accent); }
+.nav-drawer-danger { color: var(--accent-deep); }
+.nav-drawer-danger:hover { color: var(--accent); }
+
+.nav-drawer-cta {
+  display: inline-block;
+  padding: 12px 18px;
+  border: 1px solid var(--accent);
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+}
+.nav-drawer-cta:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+@keyframes drawer-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes drawer-slide {
+  from { transform: translateX(20px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* Lock body scroll quand drawer ouvert (classe sur <body>) */
+body.nav-drawer-open {
+  overflow: hidden;
 }

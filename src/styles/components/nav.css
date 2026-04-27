@@ -26,7 +26,7 @@ nav.masthead-nav {
 }
 
 nav.masthead-nav.is-stuck {
-  background: rgba(242, 236, 224, 0.92);
+  background: rgba(252, 229, 241, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom-color: rgba(26, 22, 20, 0.22);

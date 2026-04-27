@@ -16,7 +16,7 @@ nav.masthead-nav {
   font-size: 15px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: var(--paper);
+  background: var(--rose);
   border-bottom: 1px solid rgba(26, 22, 20, 0);
   transition:
     background var(--dur-base) ease,
@@ -26,7 +26,7 @@ nav.masthead-nav {
 }
 
 nav.masthead-nav.is-stuck {
-  background: rgba(252, 229, 241, 0.92);
+  background: rgba(238, 133, 192, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom-color: rgba(26, 22, 20, 0.22);

@@ -16,7 +16,7 @@
 }
 
 .post-card {
-  background: var(--paper);
+  background: var(--cream);
   border: 1px solid rgba(26, 22, 20, 0.22);
   box-shadow: var(--shadow-card);
   display: flex;
@@ -84,7 +84,8 @@
   display: block;
   aspect-ratio: 1;
   overflow: hidden;
-  background: var(--paper-deep);
+  background: var(--cream);
+  border-top: 1px solid var(--rule);
 }
 .post-media img {
   width: 100%;
@@ -197,8 +198,8 @@
   background: linear-gradient(
     to right,
     transparent 0,
-    var(--paper) 28px,
-    var(--paper) 100%
+    var(--cream) 28px,
+    var(--cream) 100%
   );
   pointer-events: none;
 }

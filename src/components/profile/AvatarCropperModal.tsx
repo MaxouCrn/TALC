@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const VIEWPORT = 280; // taille du cercle d'apercu (px)
 const OUTPUT_SIZE = 512; // resolution finale carree (px)
@@ -27,12 +27,16 @@ export function AvatarCropperModal({ file, onCancel, onSave, saving }: Props) {
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [error, setError] = useState<string | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const previewUrl = useMemo(() => URL.createObjectURL(file), [file]);
+
+  useEffect(() => {
+    return () => {
+      URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
 
   useEffect(() => {
     let cancelled = false;
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
     createImageBitmap(file)
       .then((bm) => {
         if (!cancelled) setBitmap(bm);
@@ -42,7 +46,6 @@ export function AvatarCropperModal({ file, onCancel, onSave, saving }: Props) {
       });
     return () => {
       cancelled = true;
-      URL.revokeObjectURL(url);
     };
   }, [file]);
 

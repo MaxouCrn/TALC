@@ -69,13 +69,3 @@ h1.title em { font-style: italic; color: var(--accent-deep); }
 .flourish { display: none; }
 
 .hero { position: relative; }
-.hero::after {
-  content: "• •";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--accent);
-  font-size: 14px;
-  letter-spacing: 0.6em;
-  bottom: 14px;
-}

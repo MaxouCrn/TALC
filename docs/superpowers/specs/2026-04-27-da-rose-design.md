@@ -50,7 +50,7 @@ Le décalage moderne est porté par le rose, pas par la typographie. Aucune intr
 |---------|-------|-------|
 | Ornement intra-titre | `❦ ❧ ❦` (en `--accent`) | `✦ ◆ ✦` (en `--accent` fuchsia) |
 | Coins flourish (4/section) | présents | supprimés |
-| Bordure hero/footer | flourishes | doubles points roses `• •` |
+| Bordure hero/footer | flourishes | doubles points `• •` en `--accent` (fuchsia) |
 | Filet double-rule | 2-3 par section | 1 par section maximum |
 | Drop cap | en `--ink` | en `--accent` fuchsia |
 | Bande signature | (n'existait pas) | bandeau `--rose` plein, h. 80-120px |

@@ -59,7 +59,7 @@
   position: relative;
   aspect-ratio: 6 / 1;
   min-height: 200px;
-  background: var(--paper-deep);
+  background: var(--rose);
   overflow: hidden;
   border-bottom: 1.5px solid var(--ink);
 }

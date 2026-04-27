@@ -3,15 +3,13 @@
    ======================================================================== */
 
 @media (max-width: 900px) {
-  .topbar,
-  nav.masthead-nav,
   .hero {
     padding-left: var(--page-gutter-mobile);
     padding-right: var(--page-gutter-mobile);
   }
 
-  .topbar { flex-direction: column; gap: 6px; text-align: center; }
-  nav.masthead-nav { flex-wrap: wrap; gap: 14px; }
+  /* .topbar et nav.masthead-nav : layout responsive géré dans
+     components/topbar.css et components/nav.css (grid + drawer). */
 
   .logo-wrap::before,
   .logo-wrap::after { display: none; }

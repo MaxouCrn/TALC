@@ -1,11 +1,14 @@
 /* ========================================================================
    Topbar — bandeau info (date + prochain évènement + CTA billetterie).
+   Layout grid responsive : 3 cols desktop → 2 lignes mobile.
    ======================================================================== */
 
 .topbar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "date event cta";
   align-items: center;
+  gap: 12px;
   padding: 18px var(--page-gutter);
   font-family: var(--font-body);
   font-size: var(--fs-base);
@@ -24,6 +27,8 @@
 }
 
 .topbar .date {
+  grid-area: date;
+  justify-self: start;
   font-family: var(--font-body);
   font-style: italic;
   font-size: var(--fs-md);
@@ -31,6 +36,7 @@
 }
 
 .topbar .next-event {
+  grid-area: event;
   display: flex;
   align-items: baseline;
   gap: 12px;
@@ -57,6 +63,8 @@
 }
 
 .topbar-cta {
+  grid-area: cta;
+  justify-self: end;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: var(--fs-sm);
@@ -66,8 +74,50 @@
   padding: 8px 16px;
   border: 1px solid var(--accent);
   transition: all var(--dur-base) ease;
+  white-space: nowrap;
 }
 .topbar-cta:hover {
   background: var(--accent);
   color: var(--paper);
+}
+
+/* ---- Tablette / mobile : 2 lignes ---- */
+@media (max-width: 768px) {
+  .topbar {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "date cta"
+      "event event";
+    gap: 10px 12px;
+    padding: 14px var(--page-gutter);
+  }
+  .topbar .date { font-size: var(--fs-sm); }
+  .topbar .next-event {
+    justify-self: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    padding-top: 6px;
+    border-top: 0.5px dashed rgba(26, 22, 20, 0.18);
+    width: 100%;
+    gap: 8px;
+  }
+  .topbar .next-event .label { font-size: 10px; letter-spacing: 0.1em; }
+  .topbar .next-event .title-evt { font-size: var(--fs-sm); }
+  .topbar-cta {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
+
+/* ---- < 480px : drop date pour gagner place ---- */
+@media (max-width: 479px) {
+  .topbar {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "cta"
+      "event";
+  }
+  .topbar .date { display: none; }
+  .topbar-cta { justify-self: end; }
 }
